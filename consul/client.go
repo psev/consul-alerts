@@ -361,9 +361,14 @@ func (c *ConsulAlertClient) UpdateCheckData() {
 		existing := status != nil
 
 		localHealth := Check{
-			Node:      node,
-			ServiceID: service,
-			CheckID:   check,
+			Node:        health.Node,
+			CheckID:     health.CheckID,
+			Name:        health.Name,
+			Status:      health.Status,
+			Notes:       health.Notes,
+			Output:      health.Output,
+			ServiceID:   health.ServiceID,
+			ServiceName: health.ServiceName,
 		}
 
 		if c.IsBlacklisted(&localHealth) {
