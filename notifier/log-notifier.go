@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	"github.com/Sirupsen/logrus"
 )
 
 type LogNotifier struct {
@@ -24,7 +24,7 @@ func (logNotifier *LogNotifier) Copy() Notifier {
 	return &notifier
 }
 
-//Notify sends messages to the endpoint notifier
+// Notify sends messages to the endpoint notifier
 func (logNotifier *LogNotifier) Notify(alerts Messages) bool {
 
 	logrus.Println("logging messages...")

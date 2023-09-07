@@ -10,7 +10,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	log "github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	log "github.com/Sirupsen/logrus"
 )
 
 type SlackNotifier struct {
@@ -44,7 +44,7 @@ func (slack *SlackNotifier) Copy() Notifier {
 	return &notifier
 }
 
-//Notify sends messages to the endpoint notifier
+// Notify sends messages to the endpoint notifier
 func (slack *SlackNotifier) Notify(messages Messages) bool {
 
 	if slack.Detailed {

@@ -1,20 +1,20 @@
 package notifier
 
 import (
-	"fmt"
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 
-	log "github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	log "github.com/Sirupsen/logrus"
 )
 
 type HttpEndpointNotifier struct {
 	Enabled     bool
-	ClusterName string `json:"cluster-name"`
-	BaseURL     string `json:"base-url"`
-	Endpoint    string `json:"endpoint"`
+	ClusterName string            `json:"cluster-name"`
+	BaseURL     string            `json:"base-url"`
+	Endpoint    string            `json:"endpoint"`
 	Payload     map[string]string `json:"payload"`
 }
 
@@ -28,7 +28,7 @@ func (notifier *HttpEndpointNotifier) Copy() Notifier {
 	return &n
 }
 
-//Notify sends messages to the endpoint notifier
+// Notify sends messages to the endpoint notifier
 func (notifier *HttpEndpointNotifier) Notify(messages Messages) bool {
 	overallStatus, pass, warn, fail := messages.Summary()
 	t := TemplateData{

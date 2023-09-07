@@ -1,8 +1,8 @@
 package notifier
 
 import (
-	log "github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
-	"github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/influxdb/influxdb/client"
+	log "github.com/Sirupsen/logrus"
+	"github.com/influxdb/influxdb/client"
 )
 
 type InfluxdbNotifier struct {
@@ -24,7 +24,7 @@ func (influxdb *InfluxdbNotifier) Copy() Notifier {
 	return &notifier
 }
 
-//Notify sends messages to the endpoint notifier
+// Notify sends messages to the endpoint notifier
 func (influxdb *InfluxdbNotifier) Notify(messages Messages) bool {
 	config := &client.ClientConfig{
 		Host:     influxdb.Host,

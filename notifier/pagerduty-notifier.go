@@ -1,8 +1,8 @@
 package notifier
 
 import (
-	log "github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
-	"github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/darkcrux/gopherduty"
+	log "github.com/Sirupsen/logrus"
+	"github.com/darkcrux/gopherduty"
 )
 
 const defaultRetryBaseInterval = 30
@@ -26,7 +26,7 @@ func (pd *PagerDutyNotifier) Copy() Notifier {
 	return &notifier
 }
 
-//Notify sends messages to the endpoint notifier
+// Notify sends messages to the endpoint notifier
 func (pd *PagerDutyNotifier) Notify(messages Messages) bool {
 
 	client := gopherduty.NewClient(pd.ServiceKey)

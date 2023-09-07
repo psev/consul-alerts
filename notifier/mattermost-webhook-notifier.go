@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"net/url"
 
-	log "github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	log "github.com/Sirupsen/logrus"
 )
 
 type MattermostWebhookNotifier struct {
@@ -32,7 +32,7 @@ func (n *MattermostWebhookNotifier) Copy() Notifier {
 	return &notifier
 }
 
-//Notify sends messages to the endpoint notifier
+// Notify sends messages to the endpoint notifier
 func (n *MattermostWebhookNotifier) Notify(messages Messages) bool {
 	return n.notifySimple(messages)
 }

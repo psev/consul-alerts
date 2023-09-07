@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"text/template"
 
-	log "github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	log "github.com/Sirupsen/logrus"
 )
 
 const apiEndpoint string = "https://ilertnow.com/api/v1/events"
@@ -77,7 +77,7 @@ func (il *ILertNotifier) toILertEvents(messages Messages) []iLertEvent {
 	return iLertEvents
 }
 
-//Notify sends messages to the endpoint notifier
+// Notify sends messages to the endpoint notifier
 func (il *ILertNotifier) Notify(messages Messages) bool {
 	result := true
 
@@ -92,7 +92,7 @@ func (il *ILertNotifier) Notify(messages Messages) bool {
 	return result
 }
 
-//sendEvent builds the event JSON and sends it to the iLert API
+// sendEvent builds the event JSON and sends it to the iLert API
 func (il *ILertNotifier) sendEvent(event iLertEvent) error {
 	body, err := json.Marshal(event)
 	if err != nil {

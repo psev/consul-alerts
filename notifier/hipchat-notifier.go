@@ -7,9 +7,9 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/tbruyelle/hipchat-go/hipchat"
+	"github.com/tbruyelle/hipchat-go/hipchat"
 
-	log "github.com/AcalephStorage/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	log "github.com/Sirupsen/logrus"
 )
 
 type HipChatNotifier struct {
@@ -31,7 +31,7 @@ func (notifier *HipChatNotifier) Copy() Notifier {
 	return &n
 }
 
-//Notify sends messages to the endpoint notifier
+// Notify sends messages to the endpoint notifier
 func (notifier *HipChatNotifier) Notify(messages Messages) bool {
 
 	overallStatus, pass, warn, fail := messages.Summary()
