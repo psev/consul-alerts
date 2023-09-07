@@ -7,19 +7,18 @@ env:
   matrix:
     - CONSUL_VERSION: 1.16.1
 
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq python-pip python-apt
-  - sudo pip install ansible
-
 install:
-  - "ansible-playbook -i 'localhost' -c local provision/site.yml -e consul_version=$CONSUL_VERSION"
   - go mod download
 
 script:
+  # install and start consul
+  - wget https://releases.hashicorp.com/consul/$CONSUL_VERSION/consul_$CONSUL_VERSION_linux_amd64.zip
+  - unzip consul_$CONSUL_VERSION_linux_amd64.zip
+  - chmod +x consul
+  - sudo mv consul /usr/local/bin/consul
+  - consul -dev
   # build, configure, start consul-alerts
   - make build
-  - make test
   - curl -XPUT -d @provision/fixtures/notif-profile.json 127.0.0.1:8500/v1/kv/consul-alerts/config/notif-profiles/log
   - curl -XPUT -d @provision/fixtures/notif-selection.json 127.0.0.1:8500/v1/kv/consul-alerts/config/notif-selection/hosts
   - curl -XPUT -d 1 127.0.0.1:8500/v1/kv/consul-alerts/config/checks/change-threshold
