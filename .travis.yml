@@ -9,8 +9,8 @@ env:
 
 install:
   # install and start consul
-  - wget https://releases.hashicorp.com/consul/$CONSUL_VERSION/consul_$CONSUL_VERSION_linux_amd64.zip
-  - unzip consul_$CONSUL_VERSION_linux_amd64.zip
+  - "wget https://releases.hashicorp.com/consul/$CONSUL_VERSION/consul_$CONSUL_VERSION_linux_amd64.zip"
+  - "unzip consul_$CONSUL_VERSION_linux_amd64.zip"
   - chmod +x consul
   - sudo mv consul /usr/local/bin/consul
   - consul -dev &
