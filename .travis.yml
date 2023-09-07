@@ -1,5 +1,7 @@
 language: go
 
+dist: jammy
+
 go:
   - 1.21.0
 
@@ -8,16 +10,16 @@ env:
     - CONSUL_VERSION: 1.16.1
 
 install:
-  # install and start consul
-  - "wget https://releases.hashicorp.com/consul/$CONSUL_VERSION/consul_$CONSUL_VERSION_linux_amd64.zip"
-  - "unzip consul_$CONSUL_VERSION_linux_amd64.zip"
-  - chmod +x consul
-  - sudo mv consul /usr/local/bin/consul
-  - consul -dev &
   # install go dependencies
   - go get
 
 script:
+  # install and start consul
+  - wget https://releases.hashicorp.com/consul/1.16.1/consul_1.16.1_linux_amd64.zip
+  - unzip consul_1.16.1_linux_amd64.zip
+  - chmod +x consul
+  - sudo mv consul /usr/local/bin/consul
+  - consul -dev &
   # build, configure, start consul-alerts
   - make build
   - curl -XPUT -d @provision/fixtures/notif-profile.json 127.0.0.1:8500/v1/kv/consul-alerts/config/notif-profiles/log
