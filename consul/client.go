@@ -360,7 +360,11 @@ func (c *ConsulAlertClient) UpdateCheckData() {
 		status, _, _ := kvApi.Get(key, nil)
 		existing := status != nil
 
-		localHealth := Check(*health)
+		localHealth := Check{
+			Node:      node,
+			ServiceID: service,
+			CheckID:   check,
+		}
 
 		if c.IsBlacklisted(&localHealth) {
 			log.Printf("%s:%s:%s is blacklisted.", node, service, check)
