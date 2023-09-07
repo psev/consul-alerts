@@ -4,7 +4,7 @@
   tasks:
     - name: Install Unzip
       apt:
-        pkg: unzip    
+        pkg: unzip
         update_cache: yes
     - name: Download Consul
       get_url:
@@ -52,4 +52,4 @@
         state: restarted
         enabled: yes
     - name: Join cluster
-      command: /usr/local/bin/consul join 192.168.10.10
+      command: /usr/local/bin/consul join 127.0.0.1
