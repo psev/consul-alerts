@@ -13,7 +13,7 @@ before_install:
   - sudo pip install ansible
 
 install:
-  - "ansible-playbook -i 'localhost,' -c local provision/site.yml -e bootstrap_expect=1 -e consul_version=$CONSUL_VERSION"
+  - "ansible-playbook -i 'localhost' -c local provision/site.yml -e consul_version=$CONSUL_VERSION"
   - go mod download
 
 script:

@@ -18,38 +18,5 @@
         group: root
         owner: root
         mode: 0755
-    - name: Create consul config directory
-      file:
-        dest: /etc/consul.d
-        state: directory
-        owner: root
-        group: root
-        mode: 0644
-    - name: Create consul lib directory
-      file:
-        dest: /var/lib/consul
-        state: directory
-        owner: root
-        group: root
-        mode: 0644
-    - name: Generate consul configuration file
-      template:
-        src: config.json
-        dest: /etc/consul.d/config.json
-        owner: root
-        group: root
-        mode: 0644
-    - name: Copy the consul server init
-      template:
-        src: consul-server.conf.j2
-        dest: /etc/init/consul-server.conf
-        owner: root
-        group: root
-        mode: 0444
     - name: Start server
-      service:
-        name: consul-server
-        state: restarted
-        enabled: yes
-    - name: Join cluster
-      command: /usr/local/bin/consul join 127.0.0.1
+      command: /usr/local/bin/consul agent -dev
