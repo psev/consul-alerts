@@ -13,7 +13,7 @@ install:
   - unzip consul_$CONSUL_VERSION_linux_amd64.zip
   - chmod +x consul
   - sudo mv consul /usr/local/bin/consul
-  - consul -dev
+  - consul -dev &
   # install go dependencies
   - go get
 
