@@ -19,7 +19,7 @@ script:
   - sudo unzip -d /usr/local/bin consul_${CONSUL_VERSION}_linux_amd64.zip
   - sudo chmod +x /usr/local/bin/consul
   - consul agent -dev &
-  # build, configure, start consul-alerts
+  # test, build, configure and start consul-alerts
   - make build
   - curl -XPUT -d @provision/fixtures/notif-profile.json 127.0.0.1:8500/v1/kv/consul-alerts/config/notif-profiles/log
   - curl -XPUT -d @provision/fixtures/notif-selection.json 127.0.0.1:8500/v1/kv/consul-alerts/config/notif-selection/hosts
@@ -38,6 +38,6 @@ script:
   - cat /tmp/consul-notifications.log | grep "Service=nomad-client, Check=Nomad Client HTTP Check, Status=critical"
   # restore the connection between nomad and consul
   - sudo iptables -D INPUT -s 127.0.0.1 -p tcp --dport 4646 -j DROP
-  - sleep 45
+  - sleep 45 # give consul-alerts some time to report
   # make sure that consul-alerts reported that the service is healthy
   - cat /tmp/consul-notifications.log | grep "Service=nomad-client, Check=Nomad Client HTTP Check, Status=passing"
