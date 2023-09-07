@@ -18,7 +18,7 @@ script:
   - wget https://releases.hashicorp.com/consul/1.16.1/consul_1.16.1_linux_amd64.zip
   - sudo unzip -d /usr/local/bin consul_1.16.1_linux_amd64.zip
   - sudo chmod +x /usr/local/bin/consul
-  - consul -dev &
+  - consul agent -dev &
   # build, configure, start consul-alerts
   - make build
   - curl -XPUT -d @provision/fixtures/notif-profile.json 127.0.0.1:8500/v1/kv/consul-alerts/config/notif-profiles/log
