@@ -16,8 +16,8 @@ install:
 script:
   # install and start consul
   - wget https://releases.hashicorp.com/consul/1.16.1/consul_1.16.1_linux_amd64.zip
-  - unzip -d /usr/local/bin consul_1.16.1_linux_amd64.zip
-  - chmod +x /usr/local/bin/consul
+  - sudo unzip -d /usr/local/bin consul_1.16.1_linux_amd64.zip
+  - sudo chmod +x /usr/local/bin/consul
   - consul -dev &
   # build, configure, start consul-alerts
   - make build
@@ -27,8 +27,8 @@ script:
   - build/bin/Linux-x86_64/latest/consul-alerts start --watch-events --watch-checks --consul-addr=127.0.0.1:8500 &
   # install and start nomad
   - wget https://releases.hashicorp.com/nomad/1.6.1/nomad_1.6.1_linux_amd64.zip
-  - unzip -d /usr/local/bin nomad_1.6.1_linux_amd64.zip
-  - chmod +x /usr/local/bin/nomad
+  - sudo unzip -d /usr/local/bin nomad_1.6.1_linux_amd64.zip
+  - sudo chmod +x /usr/local/bin/nomad
   - nomad agent -dev -consul-address=127.0.0.1:8500 &
   - sleep 15 # give nomad some time to start
   # drop packets between nomad and consul to make the nomad service unhealthy
