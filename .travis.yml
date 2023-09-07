@@ -8,15 +8,16 @@ env:
     - CONSUL_VERSION: 1.16.1
 
 install:
-  - go mod download
-
-script:
   # install and start consul
   - wget https://releases.hashicorp.com/consul/$CONSUL_VERSION/consul_$CONSUL_VERSION_linux_amd64.zip
   - unzip consul_$CONSUL_VERSION_linux_amd64.zip
   - chmod +x consul
   - sudo mv consul /usr/local/bin/consul
   - consul -dev
+  # install go dependencies
+  - go get
+
+script:
   # build, configure, start consul-alerts
   - make build
   - curl -XPUT -d @provision/fixtures/notif-profile.json 127.0.0.1:8500/v1/kv/consul-alerts/config/notif-profiles/log
